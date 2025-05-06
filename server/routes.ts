@@ -39,6 +39,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(500).json({ error: 'Error creating transaction' });
     }
   });
+  
+  app.post('/api/transactions/:id/toggle', async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ error: 'Invalid transaction ID' });
+      }
+      
+      const updatedTransaction = await storage.toggleTransactionStatus(id);
+      return res.status(200).json(updatedTransaction);
+    } catch (error) {
+      console.error('Error toggling transaction status:', error);
+      return res.status(500).json({ error: 'Error toggling transaction status' });
+    }
+  });
 
   const httpServer = createServer(app);
 

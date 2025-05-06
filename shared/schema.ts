@@ -7,7 +7,8 @@ export const transactions = pgTable('transactions', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
   amount: decimal('amount', { precision: 10, scale: 2 }).notNull(),
-  date: timestamp('date').defaultNow().notNull()
+  date: timestamp('date').defaultNow().notNull(),
+  active: text('active').default('true').notNull()
 });
 
 export const transactionsInsertSchema = createInsertSchema(transactions, {

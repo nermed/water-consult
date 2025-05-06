@@ -33,15 +33,45 @@ export const storage = {
   },
 
   /**
+   * Toggle transaction active status
+   */
+  async toggleTransactionStatus(id: number) {
+    // First get the transaction to know its current status
+    const transaction = await db.query.transactions.findFirst({
+      where: eq(transactions.id, id)
+    });
+
+    if (!transaction) {
+      throw new Error(`Transaction with ID ${id} not found`);
+    }
+
+    // Toggle the status
+    const newStatus = transaction.active === 'true' ? 'false' : 'true';
+    
+    const [updatedTransaction] = await db
+      .update(transactions)
+      .set({ active: newStatus })
+      .where(eq(transactions.id, id))
+      .returning();
+
+    return updatedTransaction;
+  },
+
+  /**
    * Calculate summary statistics
    */
   async getTransactionStats() {
     const allTransactions = await db.query.transactions.findMany();
     
-    const count = allTransactions.length;
+    // Only count active transactions
+    const activeTransactions = allTransactions.filter(
+      transaction => transaction.active === 'true'
+    );
     
-    // Sum all transaction amounts
-    const total = allTransactions.reduce((sum, transaction) => {
+    const count = activeTransactions.length;
+    
+    // Sum only active transaction amounts
+    const total = activeTransactions.reduce((sum, transaction) => {
       // Handle string or number types for amount
       const amount = typeof transaction.amount === 'string' 
         ? parseFloat(transaction.amount) 
