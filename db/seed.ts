@@ -4,6 +4,7 @@ import { TransactionInsert } from "@shared/schema";
 
 async function seed() {
   try {
+    return;
     // Check if there's existing data
     const existingTransactions = await db.query.transactions.findMany({
       limit: 1
