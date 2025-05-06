@@ -40,7 +40,7 @@ export default function SummaryStats({
           {isLoading ? (
             <Skeleton className="h-7 w-24 mx-auto mt-1" />
           ) : (
-            <p className="text-xl font-semibold text-gray-800">{formattedTotal} €</p>
+            <p className="text-xl font-semibold text-gray-800">{formattedTotal} FBU</p>
           )}
         </div>
       </div>
@@ -51,7 +51,7 @@ export default function SummaryStats({
           {isLoading ? (
             <Skeleton className="h-7 w-24 mx-auto mt-1" />
           ) : (
-            <p className="text-lg font-medium text-gray-700">{formattedInitialTotal} €</p>
+            <p className="text-lg font-medium text-gray-700">{formattedInitialTotal} FBU</p>
           )}
         </div>
       )}

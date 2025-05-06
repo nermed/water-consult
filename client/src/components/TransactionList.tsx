@@ -97,7 +97,7 @@ export default function TransactionList({ transactions, isLoading, onTransaction
                   <p className="text-sm text-gray-500">{formatDate(transaction.date)}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold text-gray-800">{formatAmount(transaction.amount)} €</span>
+                  <span className="font-semibold text-gray-800">{formatAmount(transaction.amount)} FBU</span>
                   <Button
                     variant="ghost"
                     size="icon"

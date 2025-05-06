@@ -105,7 +105,7 @@ export default function TransactionForm({ onTransactionAdded }: TransactionFormP
               name="amount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-700">Montant (€)</FormLabel>
+                  <FormLabel className="text-sm font-medium text-gray-700">Montant (FBU)</FormLabel>
                   <FormControl>
                     <Input 
                       type="number" 
