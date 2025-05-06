@@ -16,10 +16,18 @@ export default function Home() {
     queryKey: ['/api/transactions/stats'],
   });
 
-  const handleTransactionAdded = () => {
+  const refreshData = () => {
     // Invalidate both transactions list and stats queries
     queryClient.invalidateQueries({ queryKey: ['/api/transactions'] });
     queryClient.invalidateQueries({ queryKey: ['/api/transactions/stats'] });
+  };
+  
+  const handleTransactionAdded = () => {
+    refreshData();
+  };
+  
+  const handleTransactionToggled = () => {
+    refreshData();
   };
 
   return (
@@ -50,6 +58,7 @@ export default function Home() {
         <TransactionList 
           transactions={transactions} 
           isLoading={isLoadingTransactions} 
+          onTransactionToggled={handleTransactionToggled}
         />
       </div>
     </div>
