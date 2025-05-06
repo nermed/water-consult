@@ -48,7 +48,9 @@ export default function Home() {
         <SummaryStats 
           isLoading={isLoadingStats} 
           transactionCount={stats?.count || 0} 
+          totalCount={stats?.totalCount || 0}
           totalAmount={stats?.total || 0} 
+          initialTotalAmount={stats?.initialTotal || 0}
         />
 
         {/* Transaction Form */}

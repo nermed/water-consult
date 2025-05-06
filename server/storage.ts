@@ -69,6 +69,7 @@ export const storage = {
     );
     
     const count = activeTransactions.length;
+    const totalCount = allTransactions.length;
     
     // Sum only active transaction amounts
     const total = activeTransactions.reduce((sum, transaction) => {
@@ -79,9 +80,20 @@ export const storage = {
       return sum + Number(amount);
     }, 0);
     
+    // Sum all transaction amounts for initial total
+    const initialTotal = allTransactions.reduce((sum, transaction) => {
+      // Handle string or number types for amount
+      const amount = typeof transaction.amount === 'string' 
+        ? parseFloat(transaction.amount) 
+        : transaction.amount;
+      return sum + Number(amount);
+    }, 0);
+    
     return {
       count,
-      total
+      totalCount,
+      total,
+      initialTotal
     };
   }
 };
